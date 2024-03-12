@@ -1,3 +1,3 @@
-abstract class HomeScreenRepo {
+abstract class DataProcessingRepo {
   Future<bool> getIsValidURL(String value);
 }

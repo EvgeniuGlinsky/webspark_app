@@ -8,16 +8,15 @@ class InitialHomeScreenState extends HomeScreenState {
 }
 
 class LoadingHomeScreenState extends HomeScreenState {
-  final int loadingPercent;
-
-  LoadingHomeScreenState({
-    required this.loadingPercent,
-  });
+  LoadingHomeScreenState();
 
   @override
-  List<Object?> get props => [
-        loadingPercent,
-      ];
+  List<Object?> get props => [];
+}
+
+class SuccessHomeScreenState extends HomeScreenState {
+  @override
+  List<Object?> get props => [];
 }
 
 class ErrorHomeScreenState extends HomeScreenState {

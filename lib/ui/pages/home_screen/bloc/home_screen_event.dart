@@ -3,19 +3,14 @@ import 'package:equatable/equatable.dart';
 sealed class HomeScreenEvent extends Equatable {}
 
 class OnCountingButtonTapHomeScreenEvent extends HomeScreenEvent {
-  final String value;
+  final String url;
 
   OnCountingButtonTapHomeScreenEvent({
-    required this.value,
+    required this.url,
   });
 
   @override
   List<Object?> get props => [
-        value,
+        url,
       ];
-}
-
-class OnTextFieldValuesIncorrectScreenEvent extends HomeScreenEvent {
-  @override
-  List<Object?> get props => [];
 }
