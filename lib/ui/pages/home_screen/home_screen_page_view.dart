@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_bloc.dart';
@@ -5,9 +6,9 @@ import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_event.dart';
 import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_state.dart';
 
 class HomeScreenPageView extends StatefulWidget {
-  final HomeScreenState homeScreenState;
+  final HomeScreenState state;
 
-  const HomeScreenPageView({super.key, required this.homeScreenState});
+  const HomeScreenPageView({super.key, required this.state});
 
   @override
   State<HomeScreenPageView> createState() => _HomeScreenPageViewState();
@@ -20,6 +21,9 @@ class _HomeScreenPageViewState extends State<HomeScreenPageView> {
   void initState() {
     super.initState();
     _textController = TextEditingController();
+    if (kDebugMode) {
+      _textController.text = "https://flutter.webspark.dev/flutter/api";
+    }
   }
 
   @override
@@ -32,7 +36,10 @@ class _HomeScreenPageViewState extends State<HomeScreenPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const _Header(),
-      body: _Body(textController: _textController),
+      body: _Body(
+        textController: _textController,
+        state: widget.state,
+      ),
       backgroundColor: const Color(0xFFFFF7F2),
     );
   }
@@ -63,9 +70,10 @@ class _Header extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class _Body extends StatelessWidget {
+  final HomeScreenState state;
   final TextEditingController textController;
 
-  const _Body({required this.textController});
+  const _Body({required this.textController, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +92,14 @@ class _Body extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _TextField(textController: textController),
+          const SizedBox(height: 12),
+          if (state case ErrorHomeScreenState(:final error))
+            Text(
+              "Error: $error",
+              style: const TextStyle(
+                color: Colors.red,
+              ),
+            ),
           const Spacer(),
           Center(
             child: _BottomBar(

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:wedspark_app/domain/models/grid_task.dart';
 
 sealed class HomeScreenState extends Equatable {}
 
@@ -15,8 +16,16 @@ class LoadingHomeScreenState extends HomeScreenState {
 }
 
 class SuccessHomeScreenState extends HomeScreenState {
+  final List<GridTask> gridTasks;
+
+  SuccessHomeScreenState({
+    required this.gridTasks,
+  });
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        gridTasks,
+      ];
 }
 
 class ErrorHomeScreenState extends HomeScreenState {
