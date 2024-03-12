@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wedspark_app/app_router.dart';
+import 'package:wedspark_app/di.dart';
 
 void main() {
+  setupDi();
   runApp(const App());
 }
 
@@ -9,24 +12,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: appRouter,
       title: "Webspark App",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainPage(),
-    );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
     );
   }
 }
