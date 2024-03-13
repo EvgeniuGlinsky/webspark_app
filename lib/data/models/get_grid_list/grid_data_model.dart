@@ -1,4 +1,4 @@
-import 'package:wedspark_app/data/models/point_data_model.dart';
+import 'package:wedspark_app/data/models/get_grid_list/point_data_model.dart';
 
 class GridDataModel {
   final String id;

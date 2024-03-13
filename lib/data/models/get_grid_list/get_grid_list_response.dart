@@ -1,4 +1,4 @@
-import 'package:wedspark_app/data/models/grid_data_model.dart';
+import 'package:wedspark_app/data/models/get_grid_list/grid_data_model.dart';
 
 class GetGridListResponse {
   final bool error;

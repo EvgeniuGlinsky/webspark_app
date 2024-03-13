@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_bloc.dart';
 import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_event.dart';
 import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_state.dart';
+import 'package:wedspark_app/widgets/bottom_bar.dart';
 
 class HomeScreenPageView extends StatefulWidget {
   final HomeScreenState state;
@@ -102,8 +103,10 @@ class _Body extends StatelessWidget {
             ),
           const Spacer(),
           Center(
-            child: _BottomBar(
+            child: BottomBar(
               onPressed: () => _onButtonPressed(context),
+              title: "Start Counting Process",
+              isActive: true,
             ),
           ),
         ],
@@ -148,37 +151,6 @@ class _TextField extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _BottomBar extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  const _BottomBar({required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color(0xFF6B8E47),
-        elevation: 4,
-        padding: const EdgeInsets.symmetric(
-          vertical: 22,
-          horizontal: 12,
-        ),
-      ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Start Counting Process",
-            style: TextStyle(fontSize: 18),
-          ),
-        ],
       ),
     );
   }

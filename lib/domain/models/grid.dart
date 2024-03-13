@@ -5,9 +5,13 @@ import 'package:wedspark_app/domain/models/grid_point.dart';
 import 'package:wedspark_app/domain/models/point.dart';
 
 class Grid extends Equatable {
+  static int maxGridSize = 100;
+
+  final String id;
   final List<GridPoint> gridPoints;
 
   Grid({
+    required this.id,
     required List<GridPoint> gridPoints,
   }) : gridPoints = gridPoints.sorted();
 
@@ -29,7 +33,7 @@ class Grid extends Equatable {
   ///   ".X.",
   ///   "...",
   /// ];
-  factory Grid.parse(List<String> input) {
+  factory Grid.parse(List<String> input, String id) {
     if (input.isEmpty) {
       throw GridFormatException("Input grid cannot be empty.");
     }
@@ -51,7 +55,7 @@ class Grid extends Equatable {
         }
       }
     }
-    return Grid(gridPoints: gridPoints);
+    return Grid(gridPoints: gridPoints, id: id);
   }
 
   @override

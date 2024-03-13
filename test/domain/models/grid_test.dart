@@ -14,7 +14,7 @@ void main() {
       ];
 
       // act
-      final grid = Grid.parse(input);
+      final grid = Grid.parse(input, "7d785c38-cd54-4a98-ab57-44e50ae646c1");
 
       // assert
       expect(
@@ -31,6 +31,7 @@ void main() {
             GridPoint(Point(2, 1), true),
             GridPoint(Point(2, 2), true),
           ],
+          id: "7d785c38-cd54-4a98-ab57-44e50ae646c1",
         ),
       );
     });

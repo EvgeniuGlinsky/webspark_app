@@ -2,11 +2,12 @@ import 'dart:collection';
 
 import 'package:wedspark_app/domain/models/grid.dart';
 import 'package:wedspark_app/domain/models/point.dart';
+import 'package:wedspark_app/domain/models/shortest_path.dart';
 import 'package:wedspark_app/domain/repos/shortest_path_repo.dart';
 
 class ShortestPathRepoImpl extends ShortestPathRepo {
   @override
-  List<Point> findShortestPath(Grid grid, Point start, Point end) {
+  ShortestPath? findShortestPath(Grid grid, Point start, Point end) {
     final parentMap = <Point, Point?>{};
     final queue = Queue<Point>();
     final visited = <Point>{};
@@ -19,7 +20,9 @@ class ShortestPathRepoImpl extends ShortestPathRepo {
       final Point current = queue.removeFirst();
 
       if (current == end) {
-        return _reconstructPath(parentMap, start, end);
+        return ShortestPath(
+          points: _reconstructPath(parentMap, start, end),
+        );
       }
       const directions = [
         Point(0, 1),
@@ -41,8 +44,8 @@ class ShortestPathRepoImpl extends ShortestPathRepo {
       }
     }
 
-    // Return empty list if path not found
-    return [];
+    // Return null if path not found
+    return null;
   }
 
   bool _isAvailable(Grid grid, Point point) {

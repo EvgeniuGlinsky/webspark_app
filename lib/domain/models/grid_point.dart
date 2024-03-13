@@ -18,19 +18,10 @@ class GridPoint extends Equatable implements Comparable<GridPoint> {
 
   @override
   int compareTo(GridPoint other) {
-    if (isAvailable != other.isAvailable) {
-      return isAvailable ? -1 : 1;
-    }
-
-    final diff = point.x - point.y;
-    final otherDiff = other.point.x - other.point.y;
-
-    if (diff < otherDiff) {
-      return -1;
-    } else if (diff > otherDiff) {
-      return 1;
+    if (point.y == other.point.y) {
+      return point.x - other.point.x;
     } else {
-      return 0;
+      return point.y - other.point.y;
     }
   }
 }
