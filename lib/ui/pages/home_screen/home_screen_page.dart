@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wedspark_app/di.dart';
 import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_bloc.dart';
 import 'package:wedspark_app/ui/pages/home_screen/bloc/home_screen_state.dart';
@@ -19,11 +20,20 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
   Widget build(BuildContext context) {
     return BlocProvider<HomeScreenBloc>(
       create: (_) => getIt<HomeScreenBloc>(),
-      child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-        builder: (_, state) => HomeScreenPageView(
-          homeScreenState: state,
+      child: BlocListener<HomeScreenBloc, HomeScreenState>(
+        listenWhen: (prev, state) => state is SuccessHomeScreenState,
+        listener: (context, state) =>
+            _onSuccessState(context, state as SuccessHomeScreenState),
+        child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+          builder: (_, state) => HomeScreenPageView(
+            state: state,
+          ),
         ),
       ),
     );
+  }
+
+  void _onSuccessState(BuildContext context, SuccessHomeScreenState state) {
+    GoRouter.of(context).push("/grids_solution", extra: state.gridTasks);
   }
 }
